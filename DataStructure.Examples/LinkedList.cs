@@ -4,17 +4,22 @@ namespace DataStructure.Examples;
 
 public class LinkedList<T> : ILinkedList<T>
 {
-    private Node<T> _head;
-    private Node<T> _tail;
-    private int _count;
+    private Node<T>? _head;
+    private Node<T>? _tail;
+
     public IEnumerator<T> GetEnumerator()
     {
-        throw new NotImplementedException();
+        Node<T>? current = _head;
+        while (current != null)
+        {
+            yield return current.Data;
+            current = current.Next;
+        }
     }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-        return GetEnumerator();
+        return ((IEnumerable<T>)this).GetEnumerator();
     }
 
     public void Add(T data)
@@ -26,16 +31,16 @@ public class LinkedList<T> : ILinkedList<T>
         }
         else
         {
-            _tail.Next = node;
+            _tail!.Next = node;
         }
         _tail = node;
-        _count++;
+        Count++;
     }
 
     public bool Remove(T data)
     {
         var current = _head;
-        Node<T> prev = null;
+        Node<T>? prev = null;
         while (current != null)
         {
             if (current.Data!.Equals(data))
@@ -54,7 +59,7 @@ public class LinkedList<T> : ILinkedList<T>
                 {
                     prev.Next = current.Next;
                 }
-                _count--;
+                Count--;
                 
                 return true;
             }
@@ -65,15 +70,15 @@ public class LinkedList<T> : ILinkedList<T>
         return false;
     }
 
-    public int Count => _count;
+    public int Count { get; private set; }
 
-    public bool IsEmpty => _count == 0;
+    public bool IsEmpty => Count == 0;
 
     public void Clear()
     {
         _head = null;
         _tail = null;
-        _count = 0;
+        Count = 0;
     }
 
     public bool Contains(T data)
@@ -103,6 +108,6 @@ public class LinkedList<T> : ILinkedList<T>
         }
 
         _head = node;
-        _count++;
+        Count++;
     }
 }
