@@ -8,5 +8,5 @@ public interface IQueue<T> : IEnumerable<T>
     public T Last { get; }
     void Clear();
     bool Contains(T data);
-
+    bool IsEmpty { get; }
 }
