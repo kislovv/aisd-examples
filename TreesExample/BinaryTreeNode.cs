@@ -1,13 +1,5 @@
 namespace TreesExample;
 
-/// <summary>
-/// Расположения узла относительно родителя
-/// </summary>
-public enum Side
-{
-    Left,
-    Right
-}
 
 /// <summary>
 /// Узел бинарного дерева
@@ -45,12 +37,8 @@ public class BinaryTreeNode<T> where T : IComparable
     public BinaryTreeNode<T>? ParentNode { get; set; }
 
     /// <summary>
-    /// Расположение узла относительно его родителя
+    /// Высота поддерева (по умолчанию 0)
     /// </summary>
-    public Side? NodeSide =>
-        ParentNode == null
-            ? (Side?)null
-            : ParentNode.LeftNode == this
-                ? Side.Left
-                : Side.Right;
+    public int Hight { get; set; } = 0;
+
 }

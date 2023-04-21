@@ -11,5 +11,11 @@ public interface IBinaryTree<T> where T : IComparable
     void Remove(T data);
 
     void PrintTree();
-    
+
+    bool Contains(T data);
+
+    T BoundaryLeft(T data);
+
+    T BoundaryRight(T data);
+
 }
